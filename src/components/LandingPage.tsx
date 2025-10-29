@@ -23,7 +23,7 @@ import Base from '../assets/base.png';
 import tokilogo from '../assets/tokilogo.png';  
 
 
-import './landingPage.css';
+import './landingpage.css';
 interface LandingPageProps {
   onJoinWaitlist: () => void;
 }

@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import './landingPage.css';
+import './landingpage.css';
 const virtualCardFeatures = [
   {
     id: 1,
