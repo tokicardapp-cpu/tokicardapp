@@ -1,0 +1,44 @@
+html {
+  scroll-behavior: smooth;
+}
+.virtualCardPhone {
+ height: 500px;
+  width: auto;
+}
+.icondiv{
+  background-color: black;
+}
+@media (max-width: 640px) {
+  .virtualCardPhone {
+    height: 260px; /* smaller height on small screens */
+  }
+  .icondiv{
+  background-color: transparent;
+}
+}
+@media (min-width: 640px) and (max-width: 767px) {
+  .virtualCardPhone {
+    height: 320px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .virtualCardPhone {
+    height: 380px;
+  }
+}
+.mynav{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.virtualCardPhoneDiv{
+  border-radius: 30px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.maincard{
+  padding: 24px;
+}
+.yourin{
+  margin-top: 20px;
+
+}
