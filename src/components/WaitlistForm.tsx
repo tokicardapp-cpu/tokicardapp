@@ -118,7 +118,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
           {/* Description */}
           <p className="text-[13px] sm:text-[14px] leading-[1.5] text-center text-[#666666] mb-6 sm:mb-8 max-w-[420px] px-4" style={{ fontWeight: 400 }}>
-            Instantly create USD virtual cards, fund with crypto or Naira, and pay globally all in one sleek dashboard.
+           Be among the first to experience the future of global payments
           </p>
 
           {/* Form */}
