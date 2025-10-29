@@ -415,7 +415,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: false }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-gray-300  mb-8 sm:mb-10"
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-gray-300  mb-8 sm:mb-10 "
                 style={{ fontWeight: 400 }}
               >
                 Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
@@ -498,7 +498,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center sm:text-right order-3"
             >
-              <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }}>
+              <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardapp', '_blank')}>
                 Follow Us On X
               </button>
               <p className="text-[11px] sm:text-[12px] text-gray-500" style={{ fontWeight: 400 }}>
