@@ -415,7 +415,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: false }}
                 transition={{ delay: 0.4, duration: 0.6 }}
-                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7] mb-8 sm:mb-10"
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-gray-300  mb-8 sm:mb-10"
                 style={{ fontWeight: 400 }}
               >
                 Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
