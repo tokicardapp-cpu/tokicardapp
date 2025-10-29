@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { Check } from 'lucide-react';
 import checkcircle from  '../assets/checkcircle.png'; 
 import tokilogo from '../assets/tokilogo.png';  
-import './landingPage.css';
+import './landingpage.css';
 export function ThankYouPage() {
   return (
     <div className="min-h-screen bg-[#fafafa] flex flex-col items-center justify-center p-4 sm:p-6">
