@@ -53,8 +53,8 @@ html {
 /* w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[800px] */
 .cardname{
   position: absolute;
-  bottom: 17%;
+  bottom: 16%;
   left: 8%;
- font-size:14px;
+ font-size:13px;
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
