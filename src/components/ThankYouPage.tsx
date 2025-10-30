@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 import { Check } from 'lucide-react';
 import checkcircle from  '../assets/checkcircle.png'; 
 import tokilogo from '../assets/tokilogo.png';  
-import cardImage from '../assets/card.png';
+import cardImage from '../assets/tokilogo.png';
 import './landingpage.css';
 
 interface ThankYouPageProps {
