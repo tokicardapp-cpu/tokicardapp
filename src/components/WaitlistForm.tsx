@@ -5,6 +5,7 @@ import { toast } from 'sonner@2.0.3';
 import { User, Mail, AlertCircle } from 'lucide-react';
 import logo from 'figma:asset/820d6c255732d29ace7799e391354969e370224c.png';
 import banner from 'figma:asset/c5f8b9c8fa26756650afa4303444ee0ab7ac5bd6.png';
+import tokilogo from '../assets/tokilogo.png';  
 
 interface WaitlistFormProps {
   onSuccess: (name: string) => void;
@@ -107,18 +108,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
           {/* Logo */}
           <div className="mb-6 sm:mb-8">
-            <svg 
-              width="120" 
-              height="32" 
-              viewBox="0 0 120 32" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-[100px] h-[27px] sm:w-[120px] sm:h-[32px]"
-            >
-              <path d="M17.5 0H0V17.5C0 25.5081 6.49187 32 14.5 32C22.5081 32 29 25.5081 29 17.5V14.5H17.5V0Z" fill="#9333EA"/>
-              <circle cx="14.5" cy="17.5" r="8.5" fill="white"/>
-              <text x="38" y="23" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="600" fill="#000000">Tokicard</text>
-            </svg>
+                <img src={tokilogo} alt=""   width={118}/>
           </div>
 
           {/* Heading */}
@@ -128,7 +118,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
 
           {/* Description */}
           <p className="text-[13px] sm:text-[14px] leading-[1.5] text-center text-[#666666] mb-6 sm:mb-8 max-w-[420px] px-4" style={{ fontWeight: 400 }}>
-            Instantly create USD virtual cards, fund with crypto or Naira, and pay globally all in one sleek dashboard.
+           Be among the first to experience the future of global payments
           </p>
 
           {/* Form */}
