@@ -8,6 +8,7 @@ type AppState = 'landing' | 'waitlist' | 'submitting' | 'thankyou';
 
 export default function App() {
   const [appState, setAppState] = useState<AppState>('landing');
+  const [userName, setUserName] = useState('');
 
   const handleJoinWaitlist = () => {
     setAppState('waitlist');
@@ -17,7 +18,8 @@ export default function App() {
     setAppState('submitting');
   };
 
-  const handleSubmissionComplete = () => {
+  const handleSubmissionComplete = (name: string) => {
+    setUserName(name);
     setAppState('thankyou');
   };
 
@@ -41,7 +43,7 @@ export default function App() {
         />
       )}
 
-      {appState === 'thankyou' && <ThankYouPage />}
+      {appState === 'thankyou' && <ThankYouPage userName={userName} />}
 
       <Toaster position="top-center" richColors />
     </>
