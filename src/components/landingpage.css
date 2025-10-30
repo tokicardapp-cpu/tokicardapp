@@ -29,6 +29,7 @@ html {
 .mynav{
   padding-left: 20px;
   padding-right: 20px;
+
 }
 .virtualCardPhoneDiv{
   border-radius: 30px;
@@ -40,5 +41,16 @@ html {
 }
 .yourin{
   margin-top: 20px;
-
 }
+/* .imageandtextdiv{
+  
+}
+.textdiv{
+  
+} */
+.bigdiv{
+  /* border: 2px solid red; */
+  position: relative;
+  left: 40px; 
+}
+/* w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[800px] */

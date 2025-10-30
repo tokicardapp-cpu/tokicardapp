@@ -156,7 +156,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
               className="w-full bg-black text-white rounded-[12px] py-3 sm:py-4 text-[14px] sm:text-[15px] hover:bg-black/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-center"
               style={{ fontWeight: 500 }}
             >
-              {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+              {isSubmitting ? 'Joining...' : 'Get Early Access'}
             </button>
           </form>
         </div>

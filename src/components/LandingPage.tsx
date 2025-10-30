@@ -74,11 +74,14 @@ const blockchainLogos = [
   { name: 'Solana', emoji: Solana, color: '#14F195' },
   { name: 'TRON', emoji: TRON, color: '#FF0013' },
   { name: 'Polygon', emoji: Polygon, color: '#8247E5' },
+  { name: 'Lisk', emoji: Lisk, color: '#0D47A1' },
   { name: 'NEAR', emoji: Near, color: '#00C08B' },
   { name: 'Avalanche', emoji: Avalanche, color: '#E84142' },
   { name: 'Optimism', emoji: Optimism, color: '#FF0420' },
+  { name: 'Lisk', emoji: Lisk, color: '#0D47A1' },
   { name: 'Arbitrum', emoji: Arbitrum, color: '#28A0F0' },
   { name: 'Base', emoji: Base, color: '#0052FF' },
+  { name: 'Lisk', emoji: Lisk, color: '#0D47A1' },
 ];
 
 export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
@@ -155,13 +158,14 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
       {/* Hero Section */}
       <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8"  id='home'>
         <div className="max-w-[1400px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="grid lg:grid-cols-2  items-center imageandtextdiv">
+            {/* gap-8 lg:gap-12 */}
             {/* Left Content */}
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
-              className="order-2 lg:order-1"
+              className="order-2 lg:order-1 textdiv"
             >
               <motion.p 
                 initial={{ y: 20, opacity: 0 }}
@@ -220,7 +224,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 initial={{ rotate: -3 }}
                 animate={{ rotate: 0 }}
                 transition={{ delay: 0.8, duration: 0.7 }}
-                className="w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[500px]"
+                className=" bigdiv"
               >
                 <motion.img
                   src={cardImage}
@@ -457,6 +461,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
       </section>
 
       {/* Everything, In One Card Section - Using the new FeatureCarousel component */}
+      <div id='features'></div>
       <FeatureCarousel />
 
       {/* Footer */}
