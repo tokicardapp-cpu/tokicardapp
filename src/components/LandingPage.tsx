@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { FeatureCarousel } from "../components/carousel";
-import cardImage from '../assets/maincard.png';
+import cardImage from '../assets/whatsapp.png';
 import womanPhoneImage from '../assets/maincard.png';
 import phoneInterfaceImage from '../assets/maincard.png';
-import phoneInterfaceImagetwo from '../assets/iphonetwo.png';
-import virtualCardPhone from '../assets/iphoneone.png';
+import phoneInterfaceImagetwo from '../assets/whatsappthree.png';
+import virtualCardPhone from '../assets/whatsapptwo.png';
 import Bitcoin from '../assets/bitcoin.png';
 import Ethereum from '../assets/etheruem.png';
 import BNB from '../assets/bnb.png';
@@ -21,8 +21,10 @@ import Lisk from '../assets/lisk.png';
 import Arbitrum from '../assets/arbitrum.png';
 import Base from '../assets/base.png';
 import tokilogo from '../assets/tokilogo.png';  
-
-
+import whatsappfour from '../assets/whatsappfour.png';
+import whatsappfive from '../assets/whatsappfive.png';
+import whatsappsix from '../assets/whatsappsix.png';
+import whatsappseven from '../assets/whatsappseven.png';
 import './landingpage.css';
 interface LandingPageProps {
   onJoinWaitlist: () => void;
@@ -167,7 +169,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
               transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
               className="order-2 lg:order-1 textdiv"
             >
-              <motion.p 
+              {/* <motion.p 
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
@@ -175,18 +177,18 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 style={{ fontWeight: 400 }}
               >
                 No transaction fee to experience the future of digital payment
-              </motion.p>
+              </motion.p> */}
               
               <motion.h1 
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.7, duration: 0.7 }}
-                className="text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.1] mb-6 sm:mb-8 text-black"
+                className="text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.1] mb-6 sm:mb-8 text-black  mt-6"
                 style={{ fontWeight:  700 }}
               >
-                A Borderless Card<br />
-                For The Digital<br />
-                Generation.
+               Turn Your Chats into<br />
+               Global Payments<br />
+                {/* Generation. */}
               </motion.h1>
 
               <motion.p 
@@ -196,8 +198,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.6] text-gray-700 mb-8 sm:mb-10 max-w-[480px]"
                 style={{ fontWeight: 400 }}
               >
-                Pay globally, fund instantly with crypto or local currency. Tokicard gives you seamless control of your money anywhere, anytime.
-              </motion.p>
+              Create instant virtual cards, fund with crypto or local currency, and make global online payments. All from a friendly WhatsApp chat.</motion.p>
 
               <motion.button
                 initial={{ y: 20, opacity: 0 }}
@@ -229,28 +230,44 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 <motion.img
                   src={cardImage}
                   alt="Tokicard virtual cards"
-                  className="w-full h-auto drop-shadow-2xl"
+                  className="w-full tokicards drop-shadow-2xl"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 
                 />
               </motion.div>
+               {/* <motion.div
+              initial={{ x: 50, opacity: 0, scale: 0.95 }}
+              whileInView={{ x: 0, opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-1 lg:order-2 flex items-center justify-center virtualCardPhoneDiv mx-auto"
+            >
+              <div className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] mx-auto virtualCardPhoneDiv">
+                <img
+                  src={cardImage}
+                  alt="Virtual Card Interface"
+                  className="w-full virtualCardPhone "
+                />
+              </div>
+            </motion.div> */}
             </motion.div>
           </div>
         </div>
       </section>
+      
 
       {/* One Card, Endless Possibilities Section */}
       <section className="py-16 sm:py-10 lg:py-10 px-4 sm:px-6 lg:px-8 bg-[#0a0014] overflow-hidden">
-        <div className="max-w-[1400px] mx-auto">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="max-w-[1400px] mx-auto ">
+          <div className="grid lg:grid-cols-2  items-center contentsection">
             {/* Left Content */}
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="order-2 lg:order-1"
+              className="order-2 lg:order-1 writeupdiv"
             >
               <motion.h2 
                 initial={{ y: 20, opacity: 0 }}
@@ -260,7 +277,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white"
                 style={{ fontWeight: 700 }}
               >
-                One Card, Endless<br />Possibilities
+               Your finances simplified<br />
               </motion.h2>
 
               <motion.p
@@ -271,7 +288,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7] text-gray-300 mb-8 sm:mb-10 max-w-[480px]"
                 style={{ fontWeight: 400 }}
               >
-                Tokicard works like a classic card but it Powered and it gets funded from crypto or fiat, it has more global access in seconds.
+               Tokicard brings the power of a global card system directly to WhatsApp.<br /> No downloads. No updates. Just seamless payments in your chat.
               </motion.p>
 
               <motion.button
@@ -295,9 +312,9 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
               whileInView={{ x: 0, opacity: 1, scale: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="order-1 lg:order-2 flex items-center justify-center virtualCardPhoneDiv mx-auto"
+              className="order-1 lg:order-2 flex items-center justify-center  mx-auto  contentdiv"
             >
-              <div className="w-full max-w-[280px] sm:max-w-[320px] lg:max-w-[380px] mx-auto virtualCardPhoneDiv">
+              <div className="w-full  mx-auto virtualCardPhoneDiv">
                 <img
                   src={virtualCardPhone}
                   alt="Virtual Card Interface"
@@ -400,7 +417,8 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white "
                 style={{ fontWeight: 700 }}
               >
-                Create Your Virtual Card Instantly
+               Create Your Virtual <br />
+                Card in 60 Seconds
               </motion.h2>
 
               <motion.p
@@ -411,10 +429,11 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7] text-gray-300 mb-6 sm:mb-7"
                 style={{ fontWeight: 400 }}
               >
-                Generate your Tokicard in seconds and link it to your favorite wallets all from one secure webapp.
+                Meet the card that lives in your chat. <br />
+                No forms. No waitlist delays. Just send a message and your card appears.
               </motion.p>
 
-              <motion.p
+              {/* <motion.p
                 initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: false }}
@@ -423,7 +442,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 style={{ fontWeight: 400 }}
               >
                 Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
-              </motion.p>
+              </motion.p> */}
 
               <motion.button
                 initial={{ y: 20, opacity: 0 }}
@@ -463,6 +482,353 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
       {/* Everything, In One Card Section - Using the new FeatureCarousel component */}
       <div id='features'></div>
       <FeatureCarousel />
+
+    <section className="py-16 sm:py-10 lg:py-10 px-4 sm:px-6 lg:px-8 bg-[#0a0014] overflow-hidden" id='about'>
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-2 lg:order-1"
+            >
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white "
+                style={{ fontWeight: 700 }}
+              >
+                Fund Your Card,Your Way
+              </motion.h2>
+
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7] text-gray-300 mb-6 sm:mb-7"
+                style={{ fontWeight: 400 }}
+              >
+                Whether you’re holding crypto or cash, Tokicard bridges both worlds seamlessly. <br />
+                 Convert instantly. Fund directly from WhatsApp.
+              </motion.p>
+
+              {/* <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-gray-300  mb-8 sm:mb-10 "
+                style={{ fontWeight: 400 }}
+              >
+                Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
+              </motion.p> */}
+
+              <motion.button
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onJoinWaitlist}
+                className="bg-white text-black rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-[14px] sm:text-[15px] hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+                style={{ fontWeight: 500 }}
+              >
+                Get Early Access
+              </motion.button>
+            </motion.div>
+
+            {/* Right Content - Phone Image */}
+            <motion.div
+              initial={{ x: 50, opacity: 0, scale: 0.95 }}
+              whileInView={{ x: 0, opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-1 lg:order-2 flex items-center justify-center  mx-auto"
+            >
+              <div className="w-full max-w-[280px] sm:max-w-[350px] lg:max-w-[420px]">
+                <img
+                  src={whatsappfour}
+                  alt="Virtual Card Created Successfully"
+                  className="w-full h-auto drop-shadow-2xl virtualCardPhone"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
+
+      <section className="py-16 sm:py-10 lg:py-10 px-4 sm:px-6 lg:px-8  overflow-hidden" id='about'>
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-2 lg:order-1"
+            >
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-[#0a0014] "
+                style={{ fontWeight: 700 }}
+              >
+                Pay Globally. Instantly
+              </motion.h2>
+
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7] text-[#0a0014] mb-6 sm:mb-7"
+                style={{ fontWeight: 400 }}
+              >
+                Use your Tokicard for streaming, shopping, ads, or international checkouts: it just works. <br />
+                Because we believe spending should feel as easy as texting.
+              </motion.p>
+
+              {/* <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-[#0a0014]  mb-8 sm:mb-10 "
+                style={{ fontWeight: 400 }}
+              >
+                Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
+              </motion.p> */}
+
+              <motion.button
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onJoinWaitlist}
+                className="bg-[#0a0014] text-white rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-[14px] sm:text-[15px] hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+                style={{ fontWeight: 500 }}
+              >
+                Get Early Access
+              </motion.button>
+            </motion.div>
+
+            {/* Right Content - Phone Image */}
+            <motion.div
+              initial={{ x: 50, opacity: 0, scale: 0.95 }}
+              whileInView={{ x: 0, opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-1 lg:order-2 flex items-center justify-center  mx-auto"
+            >
+              <div className="w-full max-w-[280px] sm:max-w-[350px] lg:max-w-[420px]">
+                <img
+                  src={whatsappfive}
+                  alt="Virtual Card Created Successfully"
+                  className="w-full h-auto drop-shadow-2xl virtualCardPhone"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+
+<section className="py-16 sm:py-10 lg:py-10 px-4 sm:px-6 lg:px-8 bg-[#0a0014] overflow-hidden" id='about'>
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-2 lg:order-1"
+            >
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white "
+                style={{ fontWeight: 700 }}
+              >
+                You’re Always in Control.
+              </motion.h2>
+
+   <motion.div
+  initial={{ y: 20, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  viewport={{ once: false }}
+  transition={{ delay: 0.3, duration: 0.6 }}
+  className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7] text-gray-300 mb-6 sm:mb-7"
+>
+  <ul
+    style={{
+      listStyleType: 'disc',
+      listStylePosition: 'outside',
+      paddingLeft: '1.5rem',
+      margin: 0,
+    }}
+  >
+    <li>Encrypted chats for every transaction</li>
+    <li>Freeze/unfreeze card instantly</li>
+    <li>PIN protection & identity verification</li>
+  </ul>
+</motion.div>
+
+
+
+
+              {/* <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-gray-300  mb-8 sm:mb-10 "
+                style={{ fontWeight: 400 }}
+              >
+                Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
+              </motion.p> */}
+
+              <motion.button
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onJoinWaitlist}
+                className="bg-white text-black rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-[14px] sm:text-[15px] hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+                style={{ fontWeight: 500 }}
+              >
+                Get Early Access
+              </motion.button>
+            </motion.div>
+
+            {/* Right Content - Phone Image */}
+            <motion.div
+              initial={{ x: 50, opacity: 0, scale: 0.95 }}
+              whileInView={{ x: 0, opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-1 lg:order-2 flex items-center justify-center  mx-auto"
+            >
+              <div className="w-full max-w-[280px] sm:max-w-[350px] lg:max-w-[420px]">
+                <img
+                  src={whatsappsix}
+                  alt="Virtual Card Created Successfully"
+                  className="w-full h-auto drop-shadow-2xl virtualCardPhone"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+  <section className="py-16 sm:py-10 lg:py-10 px-4 sm:px-6 lg:px-8  overflow-hidden" id='about'>
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            {/* Left Content */}
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-2 lg:order-1"
+            >
+              <motion.h2 
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-[#0a0014] "
+                style={{ fontWeight: 700 }}
+              >
+                Experience the Flow
+              </motion.h2>
+
+
+<motion.div
+  initial={{ y: 20, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  viewport={{ once: false }}
+  transition={{ delay: 0.3, duration: 0.6 }}
+  className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  mb-6 sm:mb-7"
+>
+  <ul
+    style={{
+      listStyleType: 'disc',
+      listStylePosition: 'outside',
+      paddingLeft: '1.5rem',
+      margin: 0,
+    }}
+  >
+   <li>You’re in a chat.</li>
+    <li>You type “Create card.”</li>
+    <li>A few taps later  you’re funded, verified, and ready to spend online.</li>
+    <li>No app store. No complicated forms, just Tokicard.</li>
+     <li>The future of global spending, one chat at a time.</li>
+  </ul>
+</motion.div>
+
+ 
+              {/* <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+                className="text-[14px] sm:text-[15px] lg:text-[16px] leading-[1.7]  text-[#0a0014]  mb-8 sm:mb-10 "
+                style={{ fontWeight: 400 }}
+              >
+                Tokicard makes global payments simple. One card for all your online expenses, powered by crypto or local funding. Built for people who move fast and work across borders.
+              </motion.p> */}
+
+              <motion.button
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: false }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onJoinWaitlist}
+                className="bg-[#0a0014] text-white rounded-full px-8 sm:px-10 py-3.5 sm:py-4 text-[14px] sm:text-[15px] hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+                style={{ fontWeight: 500 }}
+              >
+                Get Early Access
+              </motion.button>
+            </motion.div>
+
+            {/* Right Content - Phone Image */}
+            <motion.div
+              initial={{ x: 50, opacity: 0, scale: 0.95 }}
+              whileInView={{ x: 0, opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="order-1 lg:order-2 flex items-center justify-center  mx-auto"
+            >
+              <div className="w-full max-w-[280px] sm:max-w-[350px] lg:max-w-[420px]">
+                <img
+                  src={whatsappseven}
+                  alt="Virtual Card Created Successfully"
+                  className="w-full h-auto drop-shadow-2xl virtualCardPhone"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
       <footer className="bg-[#0a0014] py-10 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
