@@ -4,7 +4,7 @@ html {
 .virtualCardPhone {
  height: 470px;
   /* border: 2px solid blue; */
-  width: 430px;
+  /* width: 430px; */
 }
 .icondiv{
   background-color: black;
@@ -12,7 +12,7 @@ html {
 @media (max-width: 640px) {
   .virtualCardPhone {
     height: 260px; /* smaller height on small screens */
-     width: 260px;
+     /* width: 260px; */
   }
   .icondiv{
   background-color: transparent;
@@ -21,13 +21,13 @@ html {
 @media (min-width: 640px) and (max-width: 767px) {
   .virtualCardPhone {
     height: 320px;
-      width: 320px;
+      /* width: 320px; */
   }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .virtualCardPhone {
     height: 380px;
-    width: 320px;
+    /* width: 320px; */
   }
 }
 .mynav{
@@ -63,20 +63,44 @@ html {
  font-size:13px;
  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.tokicards{
+/* .tokicards{
   height: 600px;
-}
+} */
 .contentsection{
   /* border: 2px solid blue; */
 }
 .writeupdiv{
   /* border: 2px solid red; */
-  width: 100%;
+  
 }
 .contentdiv{
   /* border: 2px solid green; */
   /* width:400px; */
 }
+.mycontainer{
+/* border: 1px solid blue; */
+width: 80%;
+padding-top: 5px;
+padding-bottom: 5px;
+}
+.mylink {
+  /* border: 1px solid red; */
+  font-size: 13.5px;           /* adjust as you like */
+  color: #4b5563;              /* same as text-gray-700 */
+  font-weight: 500;
+  overflow: hidden;            /* hide overflowing text */
+  white-space: nowrap;         /* keep it on one line */
+  text-overflow: ellipsis;     /* add "..." when text is too long */
+  display: block;              /* required for text-overflow to work */
+}
+
+.copybutton{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 @media (max-width: 640px) {
   .tokicards {
     height: 300px; /* smaller height on small screens */
@@ -92,5 +116,12 @@ html {
   padding-left: 20px;
   padding-right: 20px;
 
+}
+}
+@media (min-width: 971px)  {
+ .firstcard{
+  position: relative;
+  bottom: -80px;
+  height: 690px;
 }
 }

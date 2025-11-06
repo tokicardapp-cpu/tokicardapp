@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, color } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -186,8 +186,10 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[32px] sm:text-[48px] lg:text-[56px] xl:text-[64px] leading-[1.1] mb-6 sm:mb-8 text-black  mt-6"
                 style={{ fontWeight:  700 }}
               >
-               Turn Your Chats into<br />
-               Global Payments<br />
+              Redefining <span className="hidden md:inline"><br /></span>
+card experience <span className="hidden md:inline"><br /></span>
+powered by <span style={{ color: '#C502E8' }}>Ai</span>
+
                 {/* Generation. */}
               </motion.h1>
 
@@ -230,7 +232,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 <motion.img
                   src={cardImage}
                   alt="Tokicard virtual cards"
-                  className="w-full tokicards drop-shadow-2xl"
+                  className="w-full tokicards drop-shadow-2xl firstcard"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 
@@ -277,7 +279,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white"
                 style={{ fontWeight: 700 }}
               >
-               Your finances simplified<br />
+               Your finances simplified<br className="hidden md:inline"/>
               </motion.h2>
 
               <motion.p
@@ -417,7 +419,7 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
                 className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white "
                 style={{ fontWeight: 700 }}
               >
-               Create Your Virtual <br />
+               Create Your Virtual <br className="hidden md:inline"/>
                 Card in 60 Seconds
               </motion.h2>
 
