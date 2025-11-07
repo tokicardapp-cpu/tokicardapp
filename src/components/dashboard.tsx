@@ -72,7 +72,7 @@ export default function Dashboard() {
         </div>
 
         {/* Search Bar */}
-        <div className="relative max-w-md mx-auto sm:mx-0 mb-6">
+        {/* <div className="relative max-w-md mx-auto sm:mx-0 mb-6">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
@@ -81,10 +81,10 @@ export default function Dashboard() {
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2.5 text-[14px] rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500/30 bg-white"
           />
-        </div>
+        </div> */}
 
         {/* Content */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        {/* <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
           {loading ? (
             <div className="flex justify-center items-center py-10">
               <Loader2 className="w-6 h-6 text-gray-400 animate-spin" />
@@ -96,7 +96,7 @@ export default function Dashboard() {
             </p>
           ) : (
             <>
-              {/* Desktop Table */}
+              
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full border-collapse">
                   <thead className="bg-gray-100 text-left text-gray-600 text-sm uppercase">
@@ -129,7 +129,7 @@ export default function Dashboard() {
                 </table>
               </div>
 
-              {/* Mobile Cards */}
+              
               <div className="block md:hidden p-4 space-y-4">
                 {filteredUsers.map((user) => (
                   <div
@@ -155,7 +155,7 @@ export default function Dashboard() {
               </div>
             </>
           )}
-        </div>
+        </div> */}
       </motion.div>
     </div>
   );
