@@ -153,7 +153,7 @@ export function ThankYouPage({ userName = 'TOKICARD USER' }: ThankYouPageProps) 
           transition={{ delay: 1.0, duration: 0.5 }}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => window.open('https://www.instagram.com/tokicardai', '_blank')}
+          onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}
           className="w-full bg-black text-white rounded-full py-4 px-8 mb-4 transition-all duration-200 hover:bg-black/90"
           style={{ fontWeight: 400 }}
         >

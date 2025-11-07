@@ -990,7 +990,7 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
                  <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardapp', '_blank')}>
                 Follow Us On X
               </button>
-              <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://www.instagram.com/tokicardai', '_blank')}>
+              <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}>
                 Follow Us On Instagram
               </button>
               <p className="text-[11px] sm:text-[12px] text-gray-500" style={{ fontWeight: 400 }}>
