@@ -987,7 +987,7 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center sm:text-right order-3"
             >
-                 <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardapp', '_blank')}>
+                 <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardAI?t=JsrL460pO_aG7RttCvY8-g&s=09', '_blank')}>
                 Follow Us On X
               </button>
               <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://www.instagram.com/tokicard.ai?igsh=MTE0bm9iOXZianR0Nw==', '_blank')}>
