@@ -106,7 +106,7 @@ padding-bottom: 5px;
     height: 300px; /* smaller height on small screens */
   }
 }
-@media (min-width: 640px) and (max-width: 767px) {
+@media (min-width: 640px) and (max-width: 991px) {
   .tokicards {
     height: 400px;
   }
@@ -122,6 +122,17 @@ padding-bottom: 5px;
  .firstcard{
   position: relative;
   bottom: -80px;
-  height: 690px;
+  /* height: 690px; */
 }
+}
+@media (min-width: 970px) and (max-width: 1024px) {
+  .firstcard{
+  position: relative;
+  bottom: -40px;
+  height: 640px;
+}
+}
+.userplus{
+color:#9D00FF;
+  
 }
