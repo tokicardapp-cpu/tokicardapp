@@ -101,16 +101,24 @@ padding-bottom: 5px;
   margin-bottom: 5px;
 }
 
+
+/* @media (max-width: 640px) {
+  .tokicards {
+    height: 300px; 
+    border: 1px solid red; 
+  }
+} */
+/* 🔹 For small screens (phones) */
 @media (max-width: 640px) {
   .tokicards {
-    height: 300px; /* smaller height on small screens */
+    width: 90vw;              /* Use most of the screen width */
+    height: auto;             /* Keep natural aspect ratio */
+    max-height: 400px;        /* Let it grow taller if needed */
+    transform: scale(1.05);   /* Slightly increase visual size */
+    border: 1px solid red;             /* Optional – remove the red test border */
   }
 }
-@media (min-width: 640px) and (max-width: 991px) {
-  .tokicards {
-    height: 400px;
-  }
-}
+
 @media (max-width: 768px)  {
  .mynav{
   padding-left: 20px;

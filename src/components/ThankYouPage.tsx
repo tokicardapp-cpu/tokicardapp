@@ -69,7 +69,7 @@ export function ThankYouPage({ userName = 'TOKICARD USER' }: ThankYouPageProps) 
         <img src={tokilogo} alt="Tokicard" width={118} />
       </motion.div>
 
-      {/* Main Card Container */}
+      {/* Main Card Container r*/}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
