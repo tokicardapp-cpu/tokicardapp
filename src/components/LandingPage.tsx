@@ -316,7 +316,7 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="order-1 lg:order-2 flex items-center justify-center  mx-auto  contentdiv"
             >
-              <div className="w-full  mx-auto virtualCardPhoneDiv">
+              <div className=" mx-auto virtualCardPhoneDiv">
                 <img
                   src={virtualCardPhone}
                   alt="Virtual Card Interface"
