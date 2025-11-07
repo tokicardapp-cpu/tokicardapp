@@ -2,7 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 .virtualCardPhone {
- height: 470px;
+ /* height: 470px; */
   /* border: 2px solid blue; */
   /* width: 430px; */
 }
@@ -10,13 +10,24 @@ html {
   background-color: black;
 }
 @media (max-width: 640px) {
+  /* .virtualCardPhone {
+    max-height: 260px; 
+     border: 1px solid red;            
+    height: auto;         
+    transform: scale(1.05);   
+  } */
+  @media (max-width: 640px) {
   .virtualCardPhone {
-    max-height: 260px; /* smaller height on small screens */
-     /* width: 260px; */
-     border: 1px solid red;              /* Use most of the screen width */
-    height: auto;             /* Keep natural aspect ratio */
-    transform: scale(1.05);   /* Slightly increase visual size */
+    width: 85vw;              /* take up 90% of screen width */
+    height: auto;             /* maintain aspect ratio */
+    max-width: 220px;         /* optional: prevents oversizing on medium phones */
+    transform: scale(1.05);   /* slightly enlarge visually */
+    border: 1px solid red;             /* optional: remove red test border */
+    margin: 0 auto;           /* center the image */
+    display: block;           /* ensure it's centered properly */
   }
+}
+
   .icondiv{
   background-color: transparent;
 }
