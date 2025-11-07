@@ -144,7 +144,7 @@ useEffect(() => {
      <Link 
   to="/referral"
   onClick={() => setMobileMenuOpen(false)}
-  className="text-[15px] text-black hover:text-purple-600 transition-colors"
+  className="text-[15px] text-black hover:text-purple-600 transition-colors myinvite"
 >
   Invite
 </Link>
@@ -239,8 +239,7 @@ useEffect(() => {
             <Link 
   to="/referral"
   onClick={() => setMobileMenuOpen(false)}
-  className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
->
+  className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium  myinvite">
   Invite
 </Link>
             <button
@@ -275,8 +274,8 @@ useEffect(() => {
 
 
       {/* Hero Section  page */}
-      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8"  id='home'>
-        <div className="max-w-[1400px] mx-auto">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8 "  id='home'>
+        <div className="max-w-[1400px] mx-auto herosection ">
           <div className="grid lg:grid-cols-2  items-center imageandtextdiv">
             {/* gap-8 lg:gap-12 */}
             {/* Left Content */}

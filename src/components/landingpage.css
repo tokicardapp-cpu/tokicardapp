@@ -133,6 +133,11 @@ padding-bottom: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.myinvite{
+  font-weight: 500;
+  text-decoration: underline;
+}
+
 
 /* @media (max-width: 640px) {
   .tokicards {
@@ -171,6 +176,7 @@ padding-bottom: 5px;
   position: relative;
   bottom: -80px;
   /* height: 690px; */
+  
 }
 .mobilenav{
   display: none;
@@ -178,6 +184,10 @@ padding-bottom: 5px;
 }
 .hamburgar{
   display: none;
+}
+.herosection{
+  /* border: 2px solid red; */
+  padding-left: 25px;
 }
 }
 @media (min-width: 970px) and (max-width: 1024px) {
