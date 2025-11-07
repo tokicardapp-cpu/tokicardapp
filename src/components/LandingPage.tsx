@@ -94,6 +94,14 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get("ref");
+  if (ref) {
+    localStorage.setItem("referrer", ref.toLowerCase());
+    console.log("🌐 Referral captured on landing:", ref.toLowerCase());
+  }
+}, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -378,14 +386,14 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: false, amount: 0.3 }}
               transition={{ duration: 0.7, ease: "easeOut" }}
-              className="order-2 lg:order-1 writeupdiv"
+              className="order-2 lg:order-1 writeupdiv "
             >
               <motion.h2 
                 initial={{ y: 20, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 viewport={{ once: false }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1] mb-6 sm:mb-8 text-white"
+                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[52px] leading-[1.1]  mb-6 sm:mb-8 text-white"
                 style={{ fontWeight: 700 }}
               >
                Your finances simplified<br className="hidden md:inline"/>

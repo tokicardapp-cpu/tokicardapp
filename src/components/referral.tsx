@@ -6,7 +6,8 @@ import { Mail, Copy, UserPlus } from 'lucide-react';
 import { motion } from 'motion/react';
 import tokilogo from '../assets/tokilogo.png';
 import './landingpage.css';
-const REFERRAL_REWARD_POINTS = 10; // 🎯 change reward per referral here
+
+const REFERRAL_REWARD_POINTS = 1; // 🎯 change reward per referral here
 
 export function ReferralLookupPage() {
   const [email, setEmail] = useState('');
@@ -33,6 +34,7 @@ export function ReferralLookupPage() {
     setUserData(null);
     setReferralCount(null);
     setEarnings(null);
+    setReferralLink('');
 
     try {
       const db = await getDb();
@@ -58,10 +60,13 @@ export function ReferralLookupPage() {
       const count = referralsSnapshot.size;
       setReferralCount(count);
 
-      // 💰 Calculate earnings
+      // 💰 Calculate earnings and dynamically generate link based on current domain
       const totalEarnings = count * REFERRAL_REWARD_POINTS;
       setEarnings(totalEarnings);
-      setReferralLink(`https://tokicard.com/earlyaccess?ref=${user.referralId}`);
+
+      const link = `${window.location.origin}/?ref=${user.referralId}`;
+      setReferralLink(link);
+      console.log('🔗 Referral link generated:', link);
     } catch (error) {
       console.error('Error fetching referral data:', error);
       toast.error('Something went wrong. Please try again.');
@@ -145,66 +150,65 @@ export function ReferralLookupPage() {
           </p>
 
           {/* Referral Link Box */}
-           <div
-      className="flex items-center justify-between w-full max-w-[480px] bg-[#F8F8F8] border border-[#E5E5E5] rounded-full px-4 sm:px-6 py-2 sm:py-3 shadow-sm mx-auto overflow-hidden"
-      style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}
-    >
-      {/* Left side: Icon + Link */}
-      <div className="flex items-center flex-1 min-w-0 gap-2 mycontainer">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 flex-shrink-0"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth="2"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M13.828 10.172a4 4 0 010 5.656l-1.415 1.415a4 4 0 01-5.657-5.656l.708-.708m8.486 0l.708-.708a4 4 0 015.657 5.656l-1.415 1.415a4 4 0 01-5.657-5.656z"
-          />
-        </svg>
+          <div
+            className="flex items-center justify-between w-full max-w-[480px] bg-[#F8F8F8] border border-[#E5E5E5] rounded-full px-4 sm:px-6 py-2 sm:py-3 shadow-sm mx-auto overflow-hidden"
+            style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}
+          >
+            {/* Left side: Icon + Link */}
+            <div className="flex items-center flex-1 min-w-0 gap-2 mycontainer">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 flex-shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.828 10.172a4 4 0 010 5.656l-1.415 1.415a4 4 0 01-5.657-5.656l.708-.708m8.486 0l.708-.708a4 4 0 015.657 5.656l-1.415 1.415a4 4 0 01-5.657-5.656z"
+                />
+              </svg>
 
-       <p
-  className="text-[9.5px] sm:text-[13.5px] text-gray-700 font-medium truncate mylink overflow-hidden text-ellipsis whitespace-nowrap"
-  title={referralLink}
->
-  {referralLink}
-</p>
+              <p
+                className="text-[9.5px] sm:text-[13.5px] text-gray-700 font-medium truncate mylink overflow-hidden text-ellipsis whitespace-nowrap"
+                title={referralLink}
+              >
+                {referralLink}
+              </p>
+            </div>
 
-      </div>
+            {/* Copy Button */}
+            <button
+              onClick={handleCopyLink}
+              className="ml-3 sm:ml-4 bg-black text-white text-[13px] sm:text-[14px] font-medium rounded-full px-4 sm:px-5 copybutton sm:py-6 hover:bg-[#222] active:scale-[0.97] transition-all duration-200"
+            >
+              Copy
+            </button>
+          </div>
 
-      {/* Copy Button */}
-      <button
-        onClick={handleCopyLink}
-        className="ml-3 sm:ml-4 bg-black text-white text-[13px] sm:text-[14px] font-medium rounded-full px-4 sm:px-5 copybutton sm:py-6 hover:bg-[#222] active:scale-[0.97] transition-all duration-200"
-      >
-        Copy
-      </button>
-    </div>
+          {/* Stats Section */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-6 w-full max-w-[420px]">
+            {/* Earnings Card */}
+            <div className="flex flex-col justify-center items-center bg-white border border-gray-100 rounded-2xl py-5 sm:py-6 shadow-[0_2px_6px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+              <p className="text-gray-500 text-[13px] sm:text-[14px] font-medium mb-1">
+                Earnings
+              </p>
+              <p className="text-[#C502E8] text-[20px] sm:text-[22px] font-bold tracking-tight">
+                ${earnings?.toFixed(2) ?? 0}
+              </p>
+            </div>
 
-        {/* Stats Section */}
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-6 w-full max-w-[420px]  ">
-  {/* Earnings Card */}
-  <div className="flex flex-col justify-center items-center bg-white border border-gray-100 rounded-2xl py-5 sm:py-6 shadow-[0_2px_6px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
-    <p className="text-gray-500 text-[13px] sm:text-[14px] font-medium mb-1">
-      Earnings
-    </p>
-    <p className="text-[#C502E8] text-[20px] sm:text-[22px] font-bold tracking-tight">
-      ${earnings?.toFixed(2) ?? 0}
-    </p>
-  </div>
-
-  {/* Total Referrals Card */}
-  <div className="flex flex-col justify-center items-center bg-white border border-gray-100 rounded-2xl py-5 sm:py-6 shadow-[0_2px_6px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
-    <p className="text-gray-500 text-[13px] sm:text-[14px] font-medium mb-1">
-      Total Referrals
-    </p>
-    <p className="text-[#C502E8] text-[20px] sm:text-[22px] font-bold tracking-tight">
-      {referralCount ?? 0}
-    </p>
-  </div>
+            {/* Total Referrals Card */}
+            <div className="flex flex-col justify-center items-center bg-white border border-gray-100 rounded-2xl py-5 sm:py-6 shadow-[0_2px_6px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]">
+              <p className="text-gray-500 text-[13px] sm:text-[14px] font-medium mb-1">
+                Total Referrals
+              </p>
+              <p className="text-[#C502E8] text-[20px] sm:text-[22px] font-bold tracking-tight">
+                {referralCount ?? 0}
+              </p>
+            </div>
           </div>
         </motion.div>
       )}
