@@ -11,8 +11,11 @@ html {
 }
 @media (max-width: 640px) {
   .virtualCardPhone {
-    height: 260px; /* smaller height on small screens */
+    max-height: 260px; /* smaller height on small screens */
      /* width: 260px; */
+     border: 1px solid red;              /* Use most of the screen width */
+    height: auto;             /* Keep natural aspect ratio */
+    transform: scale(1.05);   /* Slightly increase visual size */
   }
   .icondiv{
   background-color: transparent;
