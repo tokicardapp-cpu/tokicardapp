@@ -22,7 +22,7 @@ html {
     height: auto;             /* maintain aspect ratio */
     max-width: 220px;         /* optional: prevents oversizing on medium phones */
     transform: scale(1.05);   /* slightly enlarge visually */
-    border: 1px solid red;             /* optional: remove red test border */
+                /* optional: remove red test border */
     margin: 0 auto;           /* center the image */
     display: block;           /* ensure it's centered properly */
   }
@@ -129,7 +129,7 @@ padding-bottom: 5px;
     height: auto;             /* Keep natural aspect ratio */
     max-height: 400px;        /* Let it grow taller if needed */
     transform: scale(1.05);   /* Slightly increase visual size */
-    border: 1px solid red;             /* Optional – remove the red test border */
+                /* Optional – remove the red test border */
   }
 }
 
