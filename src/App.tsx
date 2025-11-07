@@ -4,6 +4,8 @@ import { LandingPage } from './components/LandingPage';
 import { WaitlistForm } from './components/Waitlist';
 import { ThankYouPage } from './components/ThankYouPage';
 import { ReferralLookupPage } from './components/referral';
+import Dashboard from "./components/dashboard";
+
 import { useState } from 'react';
 
 function AppRoutes() {
@@ -52,7 +54,8 @@ function AppRoutes() {
           path="/thankyou"
           element={<ThankYouPage userName={userName} />}
         />
-
+         
+          <Route path="/dashboard" element={<Dashboard />} />
         {/* Referral lookup page */}
         <Route path="/referral" element={<ReferralLookupPage />} />
       </Routes>
