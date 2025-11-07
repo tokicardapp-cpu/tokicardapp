@@ -1,6 +1,6 @@
 import { motion, AnimatePresence, color } from 'motion/react';
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight,Menu, X } from 'lucide-react';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { FeatureCarousel } from "../components/carousel";
 import cardImage from '../assets/whatsapp.png';
@@ -25,6 +25,10 @@ import whatsappfour from '../assets/whatsappfour.png';
 import whatsappfive from '../assets/whatsappfive.png';
 import whatsappsix from '../assets/whatsappsix.png';
 import whatsappseven from '../assets/whatsappseven.png';
+import { Link } from "react-router-dom";
+
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet';
+// Import Menu and X icons from lucide-react for the hamburger menu
 import './landingpage.css';
 interface LandingPageProps {
   onJoinWaitlist: () => void;
@@ -89,6 +93,7 @@ const blockchainLogos = [
 export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -101,63 +106,167 @@ export function LandingPage({ onJoinWaitlist }: LandingPageProps) {
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Header */}
-      <motion.header 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100"
-       
+    <motion.header 
+  initial={{ y: -100, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100 mynav"
+>
+  <div className="w-full max-w-[1400px] mx-auto sm:px-10 lg:px-16 py-4 flex items-center justify-between">
+    
+    {/* Logo */}
+    <motion.div 
+      initial={{ x: -20, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.2, duration: 0.5 }}
+    >
+      <img src={tokilogo} alt="Tokicard logo" width={118} />
+    </motion.div>
+
+    {/* Desktop Navigation */}
+    <motion.nav 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3, duration: 0.5 }}
+      className="hidden md:flex items-center gap-8 lg:gap-10"
+    >
+      <a href="#home" className="text-[15px] text-black hover:text-purple-600 transition-colors">Home</a>
+      <a href="#about" className="text-[15px] text-black hover:text-purple-600 transition-colors">About</a>
+      <a href="#features" className="text-[15px] text-black hover:text-purple-600 transition-colors">Features</a>
+     <Link 
+  to="/referral"
+  onClick={() => setMobileMenuOpen(false)}
+  className="text-[15px] text-black hover:text-purple-600 transition-colors"
+>
+  Invite
+</Link>
+      
+    </motion.nav>
+
+ {/* Desktop Waitlist Button */}
+      
+    {/* Mobile & Desktop Right Section */}
+    <div className="flex items-center gap-3 sm:gap-4 ">
+      {/* Hamburger Menu - Mobile Only */}
+      <motion.button
+        initial={{ x: 20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        onClick={() => setMobileMenuOpen(true)}
+        className="hamburgar p-2 hover:bg-gray-100 rounded-lg transition-colors"
+        aria-label="Open menu"
       >
-        <div className="w-full max-w-[1400px] mx-auto  sm:px-10 lg:px-16 py-4 sm:py-4 flex items-center justify-between mynav"
+        <Menu className="w-6 h-6 text-black" />
+      </motion.button>
+
+      {/* Desktop Waitlist Button */}
+      <motion.button
+        initial={{ x: 20, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
+        onClick={onJoinWaitlist}
+        className=" nonebtn bg-black text-white rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-[13px] sm:text-[14px] hover:bg-black/90 transition-all hover:scale-105"
+        style={{ fontWeight: 500 }}
+      >
+        Get early access
+      </motion.button>
+    </div>
+  </div>
+
+  {/* Mobile Menu Overlay */}
+  <AnimatePresence>
+    {mobileMenuOpen && (
+      <>
+        {/* Background Overlay */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setMobileMenuOpen(false)}
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 "
+        />
+
+        {/* Slide-in Full-Screen Menu */}
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className="fixed top-0 right-0 w-[280px] sm:w-[320px] h-screen bg-white z-50 p-6 shadow-2xl flex flex-col "
+        >
+          {/* Header Section */}
+        <div className="flex justify-end">
+  <button 
+    onClick={() => setMobileMenuOpen(false)} 
+    className="btn p-2 hover:bg-gray-100 rounded-lg transition-colors"
   >
-          {/* Logo */}
-          <motion.div 
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            {/* <svg 
-              width="120" 
-              height="32" 
-              viewBox="0 0 120 32" 
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-[100px] h-[27px] sm:w-[120px] sm:h-[32px] "
+    <X className="w-6 h-6 text-black" />
+  </button>
+</div>
+
+
+          {/* Links */}
+          <nav className="flex flex-col gap-6  opennav">
+            <a 
+              href="#home"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
             >
-              <path d="M17.5 0H0V17.5C0 25.5081 6.49187 32 14.5 32C22.5081 32 29 25.5081 29 17.5V14.5H17.5V0Z" fill="#9333EA"/>
-              <circle cx="14.5" cy="17.5" r="8.5" fill="white"/>
-              <text x="38" y="23" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="600" fill="#000000">Tokicard</text>
-            </svg> */}
-            <img src={tokilogo} alt=""   width={118}/>
-          </motion.div>
-
-          {/* Navigation - Desktop */}
-          <motion.nav 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="hidden md:flex items-center gap-8 lg:gap-10"
-          >
-            <a href="#home" className="text-[15px] text-black hover:text-purple-600 transition-colors">Home</a>
-            <a href="#about" className="text-[15px] text-black hover:text-purple-600 transition-colors">About</a>
-            <a href="#features" className="text-[15px] text-black hover:text-purple-600 transition-colors">Features</a>
-          </motion.nav>
-
-          {/* Join Waitlist Button */}
-          <motion.button
-            initial={{ x: 20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-            onClick={onJoinWaitlist}
-            className="bg-black text-white rounded-full px-5 sm:px-6 py-2.5 sm:py-3 text-[13px] sm:text-[14px] hover:bg-black/90 transition-all hover:scale-105"
-            style={{ fontWeight: 500 }}
+              Home
+            </a>
+            <a 
+              href="#about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
+            >
+              About
+            </a>
+            <a 
+              href="#features"
+              onClick={() => setMobileMenuOpen(false)}
+              className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
+            >
+              Features
+            </a>
+            <Link 
+  to="/referral"
+  onClick={() => setMobileMenuOpen(false)}
+  className="text-[17px] text-black hover:text-purple-600 transition-colors font-medium"
+>
+  Invite
+</Link>
+            <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onJoinWaitlist();
+            }}
+            className="bg-black text-white rounded-full px-6 py-3 text-[15px] hover:bg-black/90 transition-all font-medium mt-4 navget"
           >
             Get early access
-          </motion.button>
-        </div>
-      </motion.header>
+          </button>
+          </nav>
 
-      {/* Hero Section */}
+          {/* Button at Bottom */}
+          {/* <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onJoinWaitlist();
+            }}
+            className="bg-black text-white rounded-full px-6 py-3 text-[15px] hover:bg-black/90 transition-all font-medium"
+          >
+            Get early access
+          </button> */}
+        </motion.div>
+      </>
+    )}
+  </AnimatePresence>
+</motion.header>
+
+
+
+
+
+      {/* Hero Section  page */}
       <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8"  id='home'>
         <div className="max-w-[1400px] mx-auto">
           <div className="grid lg:grid-cols-2  items-center imageandtextdiv">
@@ -316,11 +425,11 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="order-1 lg:order-2 flex items-center justify-center  mx-auto  contentdiv"
             >
-              <div className="w-full  mx-auto virtualCardPhoneDiv">
+             <div className="w-full max-w-[280px] sm:max-w-[350px] lg:max-w-[420px]">
                 <img
-                  src={virtualCardPhone}
-                  alt="Virtual Card Interface"
-                  className="w-full virtualCardPhone drop-shadow-2xl"
+                  src={ virtualCardPhone}
+                  alt="Virtual Card Created Successfully"
+                  className="w-full h-auto drop-shadow-2xl virtualCardPhone"
                 />
               </div>
             </motion.div>
@@ -871,8 +980,11 @@ powered by <span style={{ color: '#C502E8' }}>Ai</span>
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center sm:text-right order-3"
             >
-              <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardapp', '_blank')}>
+                 <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://x.com/tokicardapp', '_blank')}>
                 Follow Us On X
+              </button>
+              <button className="text-[13px] sm:text-[14px] text-gray-300 hover:text-purple-400 transition-colors mb-2 sm:mb-3 block mx-auto sm:ml-auto sm:mr-0" style={{ fontWeight: 500 }} onClick={() => window.open('https://www.instagram.com/tokicardai', '_blank')}>
+                Follow Us On Instagram
               </button>
               <p className="text-[11px] sm:text-[12px] text-gray-500" style={{ fontWeight: 400 }}>
                 © 2025 TokiCard. All Rights Reserved.
