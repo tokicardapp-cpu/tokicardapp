@@ -13,6 +13,7 @@ import { toast } from "sonner@2.0.3";
 import { User, Mail, AlertCircle ,Phone} from "lucide-react";
 import { motion } from "motion/react";
 import tokilogo from "../assets/tokilogo.png";
+import cardImage from "../assets/customercard.png"; // ✅ added image
 import "./landingpage.css";
 
 // ✅ Generate lowercase referral codes for consistency
@@ -36,7 +37,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-
+const [existingUserName, setExistingUserName] = useState<string | null>(null); // ✅ new state for name
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [referrer, setReferrer] = useState<string | null>(null);
   const [existingReferralId, setExistingReferralId] = useState<string | null>(
@@ -113,6 +114,8 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
       if (!querySnapshot.empty) {
         const userData = querySnapshot.docs[0].data();
         const referralId = userData.referralId;
+        const name = userData.fullName; // ✅ store user's full nam
+        setExistingUserName(name); // ✅ set name here
         toast.error("This email is already on the waitlist!");
         setExistingReferralId(referralId);
         setIsSubmitting(false);
@@ -285,6 +288,39 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="w-full mt-3 text-center"
             >
+           
+                <motion.div
+          initial={{ opacity: 0, y: -20, rotateY: -15 }}
+          animate={{ opacity: 1, y: 0, rotateY: 0 }}
+          transition={{ 
+            delay: 0.4, 
+            duration: 0.8,
+            ease: "easeOut"
+          }}
+          className="w-full max-w-[340px] sm:max-w-[380px] mb-8 sm:mb-10"
+        >
+          <div className="relative w-full">
+            {/* Card Background Image */}
+            <img 
+              src={cardImage} 
+              alt="Tokicard Virtual Card" 
+              className="w-full h-auto rounded-[16px] sm:rounded-[20px] shadow-2xl"
+            />
+            
+            {/* User's Name Overlay - Positioned where the original name is on the card */}
+            <div >
+              <p 
+                className="text-white text-[11px] sm:text-[13px] md:text-[15px] tracking-wide leading-none cardname"
+                style={{ 
+                  fontWeight: 600,
+                  textShadow: '0 1px 2px rgba(0,0,0,0.1)'
+                }}
+              >
+               {existingUserName}
+              </p>
+            </div>
+          </div>
+        </motion.div>
               <p className="text-[14px] text-[#444] mb-3 font-medium">
                 This is your referral link:
               </p>
