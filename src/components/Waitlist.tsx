@@ -10,7 +10,7 @@ import {
 } from "firebase/firestore";
 import { getDb, isFirebaseConfigured } from "../lib/firebase";
 import { toast } from "sonner@2.0.3";
-import { User, Mail, AlertCircle } from "lucide-react";
+import { User, Mail, AlertCircle ,Phone} from "lucide-react";
 import { motion } from "motion/react";
 import tokilogo from "../assets/tokilogo.png";
 import "./landingpage.css";
@@ -35,6 +35,8 @@ interface WaitlistFormProps {
 export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [referrer, setReferrer] = useState<string | null>(null);
   const [existingReferralId, setExistingReferralId] = useState<string | null>(
@@ -123,6 +125,7 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
       // Add new user to Firestore
       await addDoc(waitlistRef, {
         fullName,
+        phoneNumber,
         email: email.toLowerCase(),
         referralId,
         referredBy: referrer || null,
@@ -220,37 +223,59 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="w-full mb-8">
-            <div className="relative mb-3">
-              <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
-              <input
-                type="text"
-                placeholder="Full name"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
-                className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-              />
-            </div>
+         <form onSubmit={handleSubmit} className="w-full mb-8">
+  <div className="relative mb-3">
+    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
+    <input
+      type="text"
+      placeholder="Full name"
+      value={fullName}
+      onChange={(e) => setFullName(e.target.value)}
+      required
+      className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+    />
+  </div>
 
-            <div className="relative mb-4">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
-              <input
-                type="email"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-              />
-            </div>
+  <div className="relative mb-3">
+    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
+    <input
+      type="email"
+      placeholder="Email address"
+      value={email}
+      onChange={(e) => setEmail(e.target.value)}
+      required
+      className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+    />
+  </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
-            >
-              {isSubmitting ? "Joining..." : "Join Waitlist"}
-            </button>
-          </form>
+  <div className="relative mb-1">
+    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
+    <input
+      type="tel"
+      placeholder="Whatsapp phone number"
+      value={phoneNumber}
+      onChange={(e) => setPhoneNumber(e.target.value)}
+      required
+      pattern="^\+?\d{11,15}$"
+      title="Phone number must be between 11 and 15 digits (start with your country code)"
+      className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+    />
+  </div>
+
+ <p className="text-[11px] text-gray-500 mb-4 leading-tight">
+   Include country code, e.g. <span className="font-semibold">+2348123456789</span>
+</p>
+
+
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+  >
+    {isSubmitting ? "Joining..." : "Join Waitlist"}
+  </button>
+</form>
+
 
           {/* Referral link display */}
           {existingReferralId && (
