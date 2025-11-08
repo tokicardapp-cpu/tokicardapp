@@ -335,8 +335,8 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
 
                 <button
                   onClick={() => handleCopyLink(referralLink)}
-                  className="ml-3 bg-black text-white text-[13px] font-medium rounded-full px-4 py-2 hover:bg-[#222] transition-all"
-                >
+                    className="ml-3 sm:ml-4 bg-black text-white text-[13px] sm:text-[14px] font-medium rounded-full px-4 sm:px-5 copybutton sm:py-6 hover:bg-[#222] active:scale-[0.97] transition-all duration-200"
+      >
                   Copy
                 </button>
               </div>
