@@ -144,8 +144,33 @@ export function ThankYouPage({ userName = 'TOKICARD USER' }: ThankYouPageProps) 
           className="w-full bg-black text-white rounded-full py-4 px-8 mb-4 transition-all duration-200 hover:bg-black/90"
           style={{ fontWeight: 400 }}
         >
+          
           Follow Us on X
         </motion.button>
+
+        
+    <motion.button
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 1.0, duration: 0.5 }}
+  whileHover={{ scale: 1.02 }}
+  whileTap={{ scale: 0.98 }}
+  onClick={() =>
+    window.open(
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+        `I just got early access for @tokicardAI 
+
+Join me and get early access too using my invite link 👉 ${referralLink}`
+      )}`,
+      "_blank"
+    )
+  }
+  className="w-full bg-black text-white rounded-full py-4 px-8 mb-4 transition-all duration-200 hover:bg-black/90"
+  style={{ fontWeight: 400 }}
+>
+  Make a post on X
+</motion.button>
+
 
       <motion.button
           initial={{ opacity: 0, y: 10 }}
@@ -168,6 +193,18 @@ export function ThankYouPage({ userName = 'TOKICARD USER' }: ThankYouPageProps) 
     transition={{ delay: 1.2, duration: 0.5 }}
     className="w-full mt-5 text-center"
   >
+    <a
+  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+    `🚀 I just joined the @tokicard waitlist! Join me and get early access using my referral link 👉 ${referralLink}`
+  )}`}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-2 bg-[#1DA1F2] text-white px-4 py-2 rounded-full hover:bg-[#0d8ae7] transition-all"
+>
+ 
+  Share on X
+</a>
+
     <p className="text-[14px] sm:text-[15px] text-[#444] mb-3 font-medium">
       Share your unique referral link:
     </p>
