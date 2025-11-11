@@ -223,7 +223,11 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
           </h1>
           <p className="text-[13px] sm:text-[14px] text-center text-[#666666] mb-6 max-w-[420px]">
             Be among the first to experience the future of global payments
+             <p className="text-[13px] sm:text-[14px] text-center text-[#666666]  max-w-[420px] text-bold otptext">
+             Check your email for the OTP.
           </p>
+          </p>
+          
 
           {referrer && (
             <p className="text-[14px] text-gray-600 mb-4">
