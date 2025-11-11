@@ -10,10 +10,10 @@ import {
 } from "firebase/firestore";
 import { getDb, isFirebaseConfigured } from "../lib/firebase";
 import { toast } from "sonner@2.0.3";
-import { User, Mail, AlertCircle ,Phone} from "lucide-react";
+import { User, Mail, AlertCircle, Phone } from "lucide-react";
 import { motion } from "motion/react";
 import tokilogo from "../assets/tokilogo.png";
-import cardImage from "../assets/customercard.png"; // ✅ added image
+import cardImage from "../assets/customercard.png";
 import "./landingpage.css";
 
 // ✅ Generate lowercase referral codes for consistency
@@ -37,12 +37,15 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-const [existingUserName, setExistingUserName] = useState<string | null>(null); // ✅ new state for name
+  const [existingUserName, setExistingUserName] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [referrer, setReferrer] = useState<string | null>(null);
-  const [existingReferralId, setExistingReferralId] = useState<string | null>(
-    null
-  );
+  const [existingReferralId, setExistingReferralId] = useState<string | null>(null);
+
+  // ✅ OTP states
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [isVerifying, setIsVerifying] = useState(false);
 
   // ✅ Persist referral between pages
   useEffect(() => {
@@ -52,15 +55,9 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
       const lowerRef = ref.toLowerCase();
       setReferrer(lowerRef);
       localStorage.setItem("referrer", lowerRef);
-      console.log("🎯 Referral detected from URL:", lowerRef);
     } else {
       const savedRef = localStorage.getItem("referrer");
-      if (savedRef) {
-        setReferrer(savedRef);
-        console.log("📦 Referral restored from localStorage:", savedRef);
-      } else {
-        console.log("⚠️ No referrer found in URL or storage");
-      }
+      if (savedRef) setReferrer(savedRef);
     }
   }, []);
 
@@ -69,16 +66,16 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
     try {
       await navigator.clipboard.writeText(link);
       toast.success("Copied successfully!");
-    } catch (error) {
+    } catch {
       toast.error("Failed to copy. Please try again.");
     }
   };
 
-  // ✅ Submit handler
+  // ✅ Step 1: Send OTP
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!fullName || !email) {
+    if (!fullName || !email || !phoneNumber) {
       toast.error("Please fill in all fields");
       return;
     }
@@ -89,43 +86,91 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
       return;
     }
 
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("https://tokibackend-otp.onrender.com/send-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("OTP sent to your email!");
+        setOtpSent(true);
+      } else {
+        toast.error(data.error || "Failed to send OTP");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error connecting to verification server");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // ✅ Step 2: Verify OTP
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsVerifying(true);
+
+    try {
+      const response = await fetch("https://tokibackend-otp.onrender.com/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Email verified successfully!");
+        await addUserToFirestore();
+        setOtpSent(false);
+        setOtp("");
+      } else {
+        toast.error(data.error || "Invalid OTP");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Server error during verification");
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  // ✅ Step 3: Add verified user to Firestore
+  const addUserToFirestore = async () => {
     if (!isFirebaseConfigured) {
       toast.error("Firebase not configured — please add credentials.");
       return;
     }
 
-    setIsSubmitting(true);
-    setExistingReferralId(null);
-
     try {
       const db = await getDb();
       if (!db) {
         toast.error("Firebase initialization failed.");
-        setIsSubmitting(false);
         return;
       }
 
       const waitlistRef = collection(db, "waitlist");
-
-      // Check if email already exists
       const q = query(waitlistRef, where("email", "==", email.toLowerCase()));
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
         const userData = querySnapshot.docs[0].data();
         const referralId = userData.referralId;
-        const name = userData.fullName; // ✅ store user's full nam
-        setExistingUserName(name); // ✅ set name here
+        const name = userData.fullName;
+        setExistingUserName(name);
         toast.error("This email is already on the waitlist!");
         setExistingReferralId(referralId);
-        setIsSubmitting(false);
         return;
       }
 
-      // ✅ Generate new referral code
       const referralId = generateReferralCode(fullName);
 
-      // Add new user to Firestore
       await addDoc(waitlistRef, {
         fullName,
         phoneNumber,
@@ -136,36 +181,19 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
         timestamp: new Date().toISOString(),
       });
 
-      console.log("✅ User added with referralId:", referralId);
+      toast.success("Successfully joined the waitlist!");
 
-      // ✅ Reward the referrer (add +1 point)
       if (referrer) {
         const normalizedRef = referrer.toLowerCase();
-        const refQuery = query(
-          waitlistRef,
-          where("referralId", "==", normalizedRef)
-        );
+        const refQuery = query(waitlistRef, where("referralId", "==", normalizedRef));
         const refSnap = await getDocs(refQuery);
-
-        console.log("🔍 Looking for referrer:", normalizedRef);
-        console.log("📄 Matching docs found:", refSnap.size);
-
         if (!refSnap.empty) {
           const referrerDoc = refSnap.docs[0];
-          const currentPoints = referrerDoc.data().points || 0;
-          console.log("💰 Current points:", currentPoints);
-
           await updateDoc(referrerDoc.ref, { points: increment(1) });
-          console.log("✅ Referrer rewarded successfully!");
-        } else {
-          console.warn("⚠️ No referrer found for:", normalizedRef);
         }
       }
 
-      toast.success("Successfully joined the waitlist!");
-
       if (onLoadingStart) onLoadingStart();
-
       setTimeout(() => {
         onSuccess(fullName);
         localStorage.setItem("userReferralId", referralId);
@@ -173,8 +201,6 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
     } catch (error) {
       console.error("❌ Error adding to waitlist:", error);
       toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -186,24 +212,6 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
     <div className="h-screen bg-[#f5f5f5] flex flex-col relative overflow-hidden">
       <div className="flex-1 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
         <div className="w-full max-w-[572px] flex flex-col items-center px-4 sm:px-0">
-          {!isFirebaseConfigured && (
-            <div className="w-full mb-6 bg-yellow-50 border border-yellow-200 rounded-[12px] p-3 sm:p-4 flex items-start gap-2 sm:gap-3">
-              <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
-              <div>
-                <p className="text-[12px] sm:text-[13px] text-yellow-800 font-medium">
-                  Firebase Not Configured
-                </p>
-                <p className="text-[11px] sm:text-[12px] text-yellow-700 mt-1">
-                  Please add your Firebase credentials in{" "}
-                  <code className="bg-yellow-100 px-1 py-0.5 rounded">
-                    /lib/firebase.ts
-                  </code>
-                  .
-                </p>
-              </div>
-            </div>
-          )}
-
           {/* Logo */}
           <div className="mb-6 sm:mb-8">
             <img src={tokilogo} alt="Logo" width={118} />
@@ -217,7 +225,6 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
             Be among the first to experience the future of global payments
           </p>
 
-          {/* Optional: Show who referred user */}
           {referrer && (
             <p className="text-[14px] text-gray-600 mb-4">
               You were referred by{" "}
@@ -225,33 +232,52 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
             </p>
           )}
 
-          {/* Form */}
-         <form onSubmit={handleSubmit} className="w-full mb-8">
-  <div className="relative mb-3">
-    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
-    <input
-      type="text"
-      placeholder="Full name"
-      value={fullName}
-      onChange={(e) => setFullName(e.target.value)}
-      required
-      className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-    />
-  </div>
+          {/* Step 1: Main form */}
+          {!otpSent && (
+            <form onSubmit={handleSubmit} className="w-full mb-8">
+              <div className="relative mb-3">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
+                <input
+                  type="text"
+                  placeholder="Full name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  required
+                  className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                />
+              </div>
 
-  <div className="relative mb-3">
-    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
-    <input
-      type="email"
-      placeholder="Email address"
-      value={email}
-      onChange={(e) => setEmail(e.target.value)}
-      required
-      className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
-    />
-  </div>
+              <div className="relative mb-3">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
+                <input
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                />
+              </div>
 
-  <div className="relative mb-1">
+              {/* <div className="relative mb-1">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
+                <input
+                  type="tel"
+                  placeholder="Whatsapp phone number"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  required
+                  pattern="^\\+?\\d{11,15}$"
+                  title="Phone number must be between 11 and 15 digits (start with your country code)"
+                  className="w-full bg-white rounded-[12px] px-10 py-3 text-[14px] placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+                />
+              </div>
+
+              <p className="text-[11px] text-gray-500 mb-4 leading-tight">
+                Include country code, e.g.{" "}
+                <span className="font-semibold">+2348123456789</span>
+              </p> */}
+                 <div className="relative mb-1">
     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#999]" />
     <input
       type="tel"
@@ -269,18 +295,39 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
    Include country code, e.g. <span className="font-semibold">+2348123456789</span>
 </p>
 
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+              >
+                {isSubmitting ? "Sending OTP..." : "Join Waitlist"}
+              </button>
+            </form>
+          )}
 
-  <button
-    type="submit"
-    disabled={isSubmitting}
-    className="w-full bg-black text-white rounded-[12px] py-3 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
-  >
-    {isSubmitting ? "Joining..." : "Join Waitlist"}
-  </button>
-</form>
+          {/* Step 2: OTP form */}
+          {otpSent && (
+            <form onSubmit={handleVerifyOtp} className="w-full mb-8 mt-4">
+              <input
+                type="text"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+                maxLength={6}
+                className="w-full bg-white rounded-[12px] mb-4 px-10 py-3 text-[14px] text-center placeholder:text-[#999] focus:outline-none focus:ring-2 focus:ring-purple-500/20"
+              />
+              <button
+                type="submit"
+                disabled={isVerifying}
+                className="w-full bg-black text-white rounded-[12px] py-3 mt-8 text-[14px] hover:bg-black/90 transition-colors disabled:opacity-50"
+              >
+                {isVerifying ? "Verifying..." : "Verify OTP"}
+              </button>
+            </form>
+          )}
 
-
-          {/* Referral link display */}
+          {/* Referral + Card */}
           {existingReferralId && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -288,39 +335,32 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
               transition={{ delay: 0.3, duration: 0.5 }}
               className="w-full mt-3 text-center"
             >
-           
-                <motion.div
-          initial={{ opacity: 0, y: -20, rotateY: -15 }}
-          animate={{ opacity: 1, y: 0, rotateY: 0 }}
-          transition={{ 
-            delay: 0.4, 
-            duration: 0.8,
-            ease: "easeOut"
-          }}
-          className="w-full max-w-[340px] sm:max-w-[380px] mb-8 sm:mb-10"
-        >
-          <div className="relative w-full">
-            {/* Card Background Image */}
-            <img 
-              src={cardImage} 
-              alt="Tokicard Virtual Card" 
-              className="w-full h-auto rounded-[16px] sm:rounded-[20px] shadow-2xl"
-            />
-            
-            {/* User's Name Overlay - Positioned where the original name is on the card */}
-            <div >
-              <p 
-                className="text-white text-[11px] sm:text-[13px] md:text-[15px] tracking-wide leading-none cardname"
-                style={{ 
-                  fontWeight: 600,
-                  textShadow: '0 1px 2px rgba(0,0,0,0.1)'
-                }}
+              <motion.div
+                initial={{ opacity: 0, y: -20, rotateY: -15 }}
+                animate={{ opacity: 1, y: 0, rotateY: 0 }}
+                transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+                className="w-full max-w-[340px] sm:max-w-[380px] mb-8 sm:mb-10"
               >
-               {existingUserName}
-              </p>
-            </div>
-          </div>
-        </motion.div>
+                <div className="relative w-full">
+                  <img
+                    src={cardImage}
+                    alt="Tokicard Virtual Card"
+                    className="w-full h-auto rounded-[16px] sm:rounded-[20px] shadow-2xl"
+                  />
+                  <div>
+                    <p
+                      className="text-white text-[11px] sm:text-[13px] md:text-[15px] tracking-wide leading-none cardname"
+                      style={{
+                        fontWeight: 600,
+                        textShadow: "0 1px 2px rgba(0,0,0,0.1)",
+                      }}
+                    >
+                      {existingUserName}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
               <p className="text-[14px] text-[#444] mb-3 font-medium">
                 This is your referral link:
               </p>
@@ -335,8 +375,8 @@ const [existingUserName, setExistingUserName] = useState<string | null>(null); /
 
                 <button
                   onClick={() => handleCopyLink(referralLink)}
-                    className="ml-3 sm:ml-4 bg-black text-white text-[13px] sm:text-[14px] font-medium rounded-full px-4 sm:px-5 copybutton sm:py-6 hover:bg-[#222] active:scale-[0.97] transition-all duration-200"
-      >
+                  className="ml-3 sm:ml-4 bg-black text-white text-[13px] sm:text-[14px] font-medium rounded-full px-4 sm:px-5 sm:py-2 hover:bg-[#222] active:scale-[0.97] transition-all duration-200"
+                >
                   Copy
                 </button>
               </div>
