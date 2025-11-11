@@ -223,9 +223,9 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
           </h1>
           <p className="text-[13px] sm:text-[14px] text-center text-[#666666] mb-6 max-w-[420px]">
             Be among the first to experience the future of global payments
-             <p className="text-[13px] sm:text-[14px] text-center text-[#666666]  max-w-[420px] text-bold otptext">
+             {/* <p className="text-[13px] sm:text-[14px] text-center text-[#666666]  max-w-[420px] text-bold otptext">
              Check your email for the OTP.
-          </p>
+          </p> */}
           </p>
           
 
@@ -312,6 +312,11 @@ export function WaitlistForm({ onSuccess, onLoadingStart }: WaitlistFormProps) {
           {/* Step 2: OTP form */}
           {otpSent && (
             <form onSubmit={handleVerifyOtp} className="w-full mb-8 mt-4">
+              <div className="otpdiv">
+                   <p className="text-[13px] sm:text-[14px] text-center text-[#666666]  max-w-[420px] text-bold otptext">
+             Check your email for the OTP.
+          </p>
+              </div>
               <input
                 type="text"
                 placeholder="Enter OTP"

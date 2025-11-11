@@ -204,3 +204,9 @@ color:#9D00FF;
 .otptext{
  font-weight: bolder;
 }
+.otpdiv{
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+}
